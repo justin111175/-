@@ -1,0 +1,94 @@
+﻿  main.cpp
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(76,73): warning C4305: '引数': 'double' から '_Ty' へ切り詰めます。
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(118,40): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(118,27): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(123,40): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(123,27): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(124,42): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(124,26): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(130,41): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(130,37): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(130,24): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(230,32): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(230,23): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(234,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(234,30): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(234,21): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(257,19): warning C4244: '=': 'int' から 'T' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(259,37): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(259,25): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(263,35): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\shootemup\main.cpp(263,23): warning C4244: '引数': 'T' から 'int' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=float
+          ]
+  shootemup.vcxproj -> C:\Users\ヨウ\Desktop\授業\ゲーム数学\課題1\x64\Debug\shootemup.exe
