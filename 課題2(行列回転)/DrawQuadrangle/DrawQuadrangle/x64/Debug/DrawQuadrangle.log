@@ -1,0 +1,12 @@
+﻿  Source.cpp
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\DrawQuadrangle\Source.cpp(62,39): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\DrawQuadrangle\Source.cpp(62,35): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\DrawQuadrangle\Source.cpp(69,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\DrawQuadrangle\Source.cpp(69,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\DrawQuadrangle\Source.cpp(68,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\DrawQuadrangle\Source.cpp(68,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\DrawQuadrangle\Source.cpp(67,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\DrawQuadrangle\Source.cpp(67,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\DrawQuadrangle\Source.cpp(66,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\DrawQuadrangle\Source.cpp(66,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  DrawQuadrangle.vcxproj -> C:\Users\ヨウ\Desktop\授業\ゲーム数学\Math-2_year\課題2(行列回転)\DrawQuadrangle\x64\Debug\DrawQuadrangle.exe
