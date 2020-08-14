@@ -17,7 +17,7 @@ void DrawWood(const Capsule& cap, int handle) {
 		cap.posA.x - w, cap.posA.y - h,
 		cap.posB.x - w, cap.posB.y - h,
 		cap.posB.x + w, cap.posB.y + h,
-		cap.posA.x + w, cap.posA.y + h, handle,true);
+		cap.posA.x + w, cap.posA.y + h, handle, true);
 }
 
 
@@ -32,6 +32,9 @@ Matrix RotatePosition(const Position2& center, float angle) {
 	//③中心を元の座標へ戻す
 
 	Matrix mat = IdentityMat();
+	mat= MultipleMat(TranslateMat(center.x, center.y),
+		MultipleMat(RotateMat(angle),
+		TranslateMat(-center.x, -center.y)));
 	return mat;
 	//これを書き換えて、特定の点を中心に回転を行うようにしてください。
 }
@@ -53,27 +56,27 @@ bool IsHit(const Capsule& cap, const Circle& cc) {
 
 
 	//	//手順
-////①まず、カプセル形状の端点cap.posAからccの中心点までのベクトルvpを作ります。
-//	auto vp = cc.pos - cap.posA;
-//	//②次にカプセル形状そのもののベクトルposA→posBへのベクトルvを作ります。
-//	auto v = cap.posB - cap.posA;
-//	//③①と②の内積を求めます。
-//	auto dot = Dot(vp, v);
-//	//④③の結果を②の大きさの2乗で割ります
-//	auto vrate =  v*v/dot;
-//	//⑤④の結果をクランプします
-//	vrate = Clamp(vrate);
-//	//⑥⑤の結果を②の結果にかけます
-//	v *= vrate;
-//	//⑦①のベクトルから②のベクトルを引きます
-//		//vp -= v;
-//	//⑧⑦のベクトルの大きさを測ります
-//		//vp.Magnitude();
-//	//⑨⑧の値と、cap.radius+cc.radiusの値を比較します。
-//	return (vp - v).Magnitude() <= cap.radius + cc.radius;
+	//①まず、カプセル形状の端点cap.posAからccの中心点までのベクトルvpを作ります。
+	auto vp = cc.pos - cap.posA;
+	//②次にカプセル形状そのもののベクトルposA→posBへのベクトルvを作ります。
+	auto v = cap.posB - cap.posA;
+	//③①と②の内積を求めます。
+	auto dot = Dot(vp, v);
+	//④③の結果を②の大きさの2乗で割ります
+	auto vrate =  dot/(v*v);
+	//⑤④の結果をクランプします
+	vrate = Clamp(vrate);
+	//⑥⑤の結果を②の結果にかけます
+	v *= vrate;
+	//⑦①のベクトルから②のベクトルを引きます
+		//vp -= v;
+	//⑧⑦のベクトルの大きさを測ります
+		//vp.Magnitude();
+	//⑨⑧の値と、cap.radius+cc.radiusの値を比較します。
+	return (vp - v).Magnitude() <= cap.radius + cc.radius;
 
-	return false;
 }
+
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ChangeWindowMode(true);
@@ -94,6 +97,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	auto circle= LoadGraph("img/rock.png"); 
 
 	Capsule cap(20,Position2((sw-wdW)/2,sh-100),Position2((sw - wdW) / 2+wdW,sh-100));
+	Circle circle_;
+	circle_.pos = { 300,0 };
+	circle_.radius = 24;
 
 	char keystate[256];
 	
@@ -101,13 +107,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	int frame = 0;
 	bool isLeft = false;
+	bool gameOverFlag_ = false;
 	while (ProcessMessage() == 0) {
 		ClearDrawScreen();
 		GetHitKeyStateAll(keystate);
 
 		DrawBox(0, 0, sw, sh, 0xaaffff, true);
-
+		
 		int mx = 0, my = 0;
+
+		circle_.pos.y += 4;
+
 
 		if (keystate[KEY_INPUT_LEFT]) {
 			isLeft = true;
@@ -138,9 +148,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 		//当たり判定を完成させて当たったときの反応を書いてください
-		//if(IsHit(cap,circle)){
-		//	
-		//}
+		if(IsHit(cap,circle_)){
+			//gameOverFlag_ = true;
+		}
 
 		//カプセル回転
 		Matrix rotMat=RotatePosition(Position2(mx, my), angle);
@@ -170,7 +180,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		DrawRectGraph(0, 32, 96, 32, 32, 32, chipH, true);
 		DrawRectGraph(sw-32, 32, 32, 32, 32, 32, chipH, true);
 		
-		DrawGraph(0, 0, circle, true);
+
 
 
 		destY = 64;
@@ -180,9 +190,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			destY += dest_chip_size;
 		}
 
+		if (circle_.pos.y > 800)
+		{
+			circle_.pos.x = 24+GetRand(512-24);
+			circle_.pos.y = 0;
+		}
+		if (!gameOverFlag_)
+		{
+			DrawWood(cap, woodH);
 
-		DrawWood(cap, woodH);
-		DrawCircle(mx, my, 30, 0xff0000, false, 3);
+			DrawGraph(circle_.pos.x, circle_.pos.y, circle, true);
+
+			DrawCircle(mx, my, 30, 0xff0000, false, 3);
+
+		}
+
 		++frame;
 		
 		ScreenFlip();
