@@ -83,6 +83,8 @@ bool IsHit(const Capsule& cap, const Circle& cc) {
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ChangeWindowMode(true);
 	SetGraphMode(512, 800, 32);
+	SetWindowText("1916229_YANG CHIHCHENG");											// タイトルバー
+
 	DxLib_Init();
 	SetDrawScreen(DX_SCREEN_BACK);
 
