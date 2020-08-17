@@ -78,6 +78,8 @@ bool IsHit(const Capsule& cap, const Circle& cc) {
 }
 
 
+
+
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ChangeWindowMode(true);
 	SetGraphMode(512, 800, 32);
@@ -95,6 +97,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	auto cascadeH = LoadGraph("img/cascade_chip.png");
 	auto chipH = LoadGraph("img/atlas0.png");
 	auto circle= LoadGraph("img/rock.png"); 
+	auto clear = LoadGraph("img/clear.png");
 
 	Capsule cap(20,Position2((sw-wdW)/2,sh-100),Position2((sw - wdW) / 2+wdW,sh-100));
 	Circle circle_;
@@ -108,6 +111,41 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int frame = 0;
 	bool isLeft = false;
 	bool gameOverFlag_ = false;
+	bool gameclearFlag_ = false;
+
+	auto Init = [&]() {
+		wdW = 200;
+		cap.radius = 20;
+		cap.posA = Position2((sw - wdW) / 2, sh - 100);
+		cap.posB= Position2((sw - wdW) / 2 + wdW, sh - 100);
+
+		circle_.pos = { 300,0 };
+		circle_.radius = 24;
+
+
+		angle = 0.0f;
+
+		frame = 0;
+		isLeft = false;
+		gameOverFlag_ = false;
+		gameclearFlag_ = false;
+
+	};
+	auto OverCheck = [&]() {
+		if (cap.posA.x < 30 || cap.posB.x < 30)
+		{
+			gameOverFlag_ = true;
+		}
+		if (cap.posA.x > 512 - 24 * 2 || cap.posB.x > 512 - 24 * 2)
+		{
+			gameOverFlag_ = true;
+		}
+	
+	
+	};
+
+
+
 	while (ProcessMessage() == 0) {
 		ClearDrawScreen();
 		GetHitKeyStateAll(keystate);
@@ -118,44 +156,54 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		circle_.pos.y += 4;
 
-
-		if (keystate[KEY_INPUT_LEFT]) {
-			isLeft = true;
-		}
-		else if (keystate[KEY_INPUT_RIGHT]) {
-			isLeft = false;
+		if (cap.posA.y < 50 || cap.posB.y < 50)
+		{
+			gameclearFlag_ = true;
 		}
 
-		if (isLeft) {
-			mx = cap.posA.x;
-			my = cap.posA.y;
-		}
-		else {
-			mx = cap.posB.x;
-			my = cap.posB.y;
+		if (!gameclearFlag_)
+		{
+			if (keystate[KEY_INPUT_LEFT]) {
+				isLeft = true;
+			}
+			else if (keystate[KEY_INPUT_RIGHT]) {
+				isLeft = false;
+			}
+
+			if (isLeft) {
+				mx = cap.posA.x;
+				my = cap.posA.y;
+			}
+			else {
+				mx = cap.posB.x;
+				my = cap.posB.y;
+			}
+
+			if (keystate[KEY_INPUT_Z]) {
+
+				angle = -0.05f;
+			}
+			else if (keystate[KEY_INPUT_X]) {
+
+				angle = 0.05f;
+			}
+			else {
+				angle = 0.0f;
+			}
+
+			//当たり判定を完成させて当たったときの反応を書いてください
+			if(IsHit(cap,circle_)){
+				gameOverFlag_ = true;
+			}
+			OverCheck();
+
+
+			//カプセル回転
+			Matrix rotMat=RotatePosition(Position2(mx, my), angle);
+			cap.posA = MultipleVec(rotMat, cap.posA);
+			cap.posB = MultipleVec(rotMat, cap.posB);
 		}
 
-		if (keystate[KEY_INPUT_Z]) {
-
-			angle = -0.05f;
-		}
-		else if (keystate[KEY_INPUT_X]) {
-
-			angle = 0.05f;
-		}
-		else {
-			angle = 0.0f;
-		}
-
-		//当たり判定を完成させて当たったときの反応を書いてください
-		if(IsHit(cap,circle_)){
-			//gameOverFlag_ = true;
-		}
-
-		//カプセル回転
-		Matrix rotMat=RotatePosition(Position2(mx, my), angle);
-		cap.posA = MultipleVec(rotMat, cap.posA);
-		cap.posB = MultipleVec(rotMat, cap.posB);
 
 		//背景の描画
 		//滝
@@ -183,6 +231,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
+
 		destY = 64;
 		while (destY < sh) {
 			DrawRectGraph(0, destY, 96, 64, 32, 32, chipH, true);
@@ -192,16 +241,59 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		if (circle_.pos.y > 800)
 		{
-			circle_.pos.x = 24+GetRand(512-24);
+			circle_.pos.x =GetRand(512);
+			if (circle_.pos.x < 24)
+			{
+				circle_.pos.x = 24;
+			}
+			if (circle_.pos.x > 512 - 24*2)
+			{
+				circle_.pos.x = 512 - 24*2;
+			}
+
 			circle_.pos.y = 0;
 		}
+
+		
+		if (gameclearFlag_)
+		{
+			DrawGraph(25, 300, clear, true);
+			SetFontSize(30);
+			DrawString(85, 500, "スペースキーでリセット", 0x000000);
+
+			if (keystate[KEY_INPUT_SPACE])
+			{
+				Init();
+			}
+
+		}
+
+
 		if (!gameOverFlag_)
 		{
 			DrawWood(cap, woodH);
 
-			DrawGraph(circle_.pos.x, circle_.pos.y, circle, true);
+			if (!gameclearFlag_)
+			{
+				DrawCircle(mx, my, 30, 0xff0000, false, 3);
+				DrawGraph(circle_.pos.x, circle_.pos.y, circle, true);
 
-			DrawCircle(mx, my, 30, 0xff0000, false, 3);
+			}
+
+		}
+		else
+		{
+			SetFontSize(65);
+			DrawString(125, 350, "GameOver", 0x000000,0xFFFFFF);
+
+			SetFontSize(30);
+			DrawString(85, 450, "スペースキーでリセット", 0x000000);
+
+			if (keystate[KEY_INPUT_SPACE])
+			{
+				Init();
+			}
+
 
 		}
 
